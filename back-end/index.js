@@ -1,16 +1,14 @@
-console.log("hellow");
-
 const express = require("express");
+const config = require("./config/app");
+const router = require("./router");
 
 const app = express();
+const bodyParser = require("body-parser");
+const port = config.appPort;
 
-const port = 3000;
-app.get("/home", (req, res) => {
-  return res.send("Welcome Home screen");
-});
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(router);
 app.listen(port, () => {
-  console.log("Server listening on port ${port}");
+  console.log(`Server listening on port ${port}`);
 });
-
-console.log("Hello world");
